@@ -1,0 +1,58 @@
+package tqs;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.EmptyStackException;
+import java.util.Stack;
+
+import org.junit.jupiter.api.Test;
+
+public class TqsStackTestIA {
+    
+    @Test
+    public void testIsEmpty() {
+        Stack<Integer> stack = new Stack<>();
+        assertTrue(stack.isEmpty(), "Stack should be empty");
+    }
+
+    @Test
+    public void testPush() {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        assertFalse(stack.isEmpty(), "Stack should not be empty after push");
+        assertEquals(1, stack.peek(), "Top element should be 1");
+    }
+
+    @Test
+    public void testPop() {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        int popped = stack.pop();
+        assertEquals(1, popped, "Popped element should be 1");
+        assertTrue(stack.isEmpty(), "Stack should be empty after pop");
+    }
+
+    @Test
+    public void testPeek() {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        int top = stack.peek();
+        assertEquals(1, top, "Top element should be 1");
+        assertFalse(stack.isEmpty(), "Stack should not be empty after peek");
+    }
+
+    @Test
+    public void testPopEmptyStack() {
+        Stack<Integer> stack = new Stack<>();
+        assertThrows(EmptyStackException.class, stack::pop, "Popping empty stack should throw EmptyStackException");
+    }
+
+    @Test
+    public void testPeekEmptyStack() {
+        Stack<Integer> stack = new Stack<>();
+        assertThrows(EmptyStackException.class, stack::peek, "Peeking empty stack should throw EmptyStackException");
+    }
+}
