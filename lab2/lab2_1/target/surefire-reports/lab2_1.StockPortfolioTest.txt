@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: lab2_1.StockPortfolioTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.870 s <<< FAILURE! -- in lab2_1.StockPortfolioTest
+lab2_1.StockPortfolioTest.totalValueTest -- Time elapsed: 0.836 s <<< ERROR!
+org.mockito.exceptions.misusing.UnnecessaryStubbingException: 
+
+Unnecessary stubbings detected.
+Clean & maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+  1. -> at lab2_1.StockPortfolioTest.totalValueTest(StockPortfolioTest.java:29)
+Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
+	at org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:197)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
