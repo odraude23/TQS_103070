@@ -1,0 +1,149 @@
+{
+  "id": "d184bee1-94ae-49f6-93dc-4bcb60d9d822",
+  "version": "2.0",
+  "name": "hw1_checkReservation",
+  "url": "http://localhost:5173",
+  "tests": [{
+    "id": "755ecb45-9e33-46a5-a6aa-f88f04eadc12",
+    "name": "checkReservation",
+    "commands": [{
+      "id": "bc424262-7011-49f7-8bb1-5fa197e4a469",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a79b25da-3847-48f9-8186-36b49d922e38",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1053",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b87909bf-c671-440a-914e-238494d0e955",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Reservations",
+      "targets": [
+        ["linkText=Reservations", "linkText"],
+        ["css=.nav-item:nth-child(2) .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservations')]", "xpath:link"],
+        ["xpath=//div[@id='navbarNav']/ul/li[2]/h4/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/reservation')]", "xpath:href"],
+        ["xpath=//li[2]/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservations')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e957a445-c121-42d0-af27-9728d0a6b9cd",
+      "comment": "",
+      "command": "click",
+      "target": "id=tokenInput",
+      "targets": [
+        ["id=tokenInput", "id"],
+        ["css=#tokenInput", "css:finder"],
+        ["xpath=//input[@id='tokenInput']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d58273eb-81fd-4fc1-8076-b96fab6e9a96",
+      "comment": "",
+      "command": "type",
+      "target": "id=tokenInput",
+      "targets": [
+        ["id=tokenInput", "id"],
+        ["css=#tokenInput", "css:finder"],
+        ["xpath=//input[@id='tokenInput']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "a83b38f8-9723-4adb-b6e1-7d591be56161"
+    }, {
+      "id": "691ea664-b2bd-4082-b1d7-9532844baf90",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Check Token')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d511fff8-0ab9-4ab0-865c-2255fa84159d",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Check Token')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8fcbf8e-a3af-4ada-ba0d-4637e7ce3f80",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8066b941-4eca-4b2b-a6e2-cbe58b91df09",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mark as Used')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "80cae60c-4287-47a1-a735-b2642533a0c6",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mark as Used')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dc07600d-2b7c-4139-8424-9ec4a088f5cc",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e7d8d4eb-0fa8-4289-9866-4f4664050e8a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["755ecb45-9e33-46a5-a6aa-f88f04eadc12"]
+  }],
+  "urls": ["http://localhost:5173/"],
+  "plugins": []
+}

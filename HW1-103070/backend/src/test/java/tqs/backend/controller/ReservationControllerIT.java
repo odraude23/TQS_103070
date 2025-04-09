@@ -3,12 +3,13 @@ package tqs.backend.controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.test.context.TestPropertySource;
+
 import tqs.backend.entities.*;
 import tqs.backend.repo.*;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureTestDatabase
+@TestPropertySource( locations = "classpath:application-integrationtest.properties")
 class ReservationControllerIT {
 
     @LocalServerPort
@@ -66,10 +67,9 @@ class ReservationControllerIT {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>(reservation.getToken(), headers);
 
         ResponseEntity<Reservation> response = restTemplate.exchange(
-                BASE_URL, HttpMethod.GET, entity, Reservation.class);
+                BASE_URL + "/" + reservation.getToken(), HttpMethod.GET, null, Reservation.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
@@ -82,10 +82,9 @@ class ReservationControllerIT {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>(reservation.getToken(), headers);
 
         ResponseEntity<Reservation> response = restTemplate.postForEntity(
-                BASE_URL + "/used", entity, Reservation.class);
+                BASE_URL + "/used/" + reservation.getToken(), null, Reservation.class);
 
         //get the reservation from the database
         Reservation updatedReservation = reservationRepo.findByToken(reservation.getToken());
@@ -100,10 +99,9 @@ class ReservationControllerIT {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>(reservation.getToken(), headers);
 
         ResponseEntity<Reservation> response = restTemplate.postForEntity(
-                BASE_URL + "/cancel", entity, Reservation.class);
+                BASE_URL + "/cancel/" + reservation.getToken(), null, Reservation.class);
 
         //get the reservation from the database
         Reservation updatedReservation = reservationRepo.findByToken(reservation.getToken());

@@ -63,6 +63,13 @@ public class WeatherCache {
         return String.format("Hits: %d, Misses: %d, Puts: %d", hits, misses, puts);
     }
 
+    public List<CacheEntry> getAllEntries() {
+        clearExpiredEntries();
+        hits += cache.size();
+        misses += (5 - cache.size());
+        return List.copyOf(cache.values());
+    }
+
     private void clearExpiredEntries() {
         cache.entrySet().removeIf(entry -> entry.getValue().isExpired(ttlMinutes));
     }

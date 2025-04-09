@@ -26,6 +26,12 @@ public class ReservationService {
 
     public Reservation makeReservation(long mealId, int numberOfPeople) {
         log.info("Making reservation for meal ID: {} with number of people: {}", mealId, numberOfPeople);
+
+        if (numberOfPeople <= 0) {
+            log.error("Number of people must be greater than zero");
+            return null;
+        }
+        
         Meal meal = mealService.getMealById(mealId);
 
         if (meal == null) {

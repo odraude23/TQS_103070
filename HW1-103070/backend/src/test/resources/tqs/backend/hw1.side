@@ -1,0 +1,93 @@
+{
+  "id": "0d70c57d-bd8e-42bf-a6b0-67613779b656",
+  "version": "2.0",
+  "name": "hw1",
+  "url": "http://localhost:5173",
+  "tests": [{
+    "id": "35f11624-462d-408b-92ca-2a11e9b451ab",
+    "name": "reservationTest",
+    "commands": [{
+      "id": "98e6b271-09e8-4339-945d-35d87ca8f5d2",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a9d36155-80ee-4e23-98f5-756b6435956d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1053",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9c799b2d-675c-4a04-a94c-f8632db07b2a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=View Menus",
+      "targets": [
+        ["linkText=View Menus", "linkText"],
+        ["css=.col-md-6:nth-child(1) .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'View Menus')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/div/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/meal/1')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Menus')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b53fe18a-425c-46a7-878b-1001ec3f391d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .form-control",
+      "targets": [
+        ["css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .form-control", "css:finder"],
+        ["xpath=//input[@value='1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d347aa33-42ec-46e0-8557-db2b674bd295",
+      "comment": "",
+      "command": "type",
+      "target": "css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .form-control",
+      "targets": [
+        ["css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .form-control", "css:finder"],
+        ["xpath=//input[@value='1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "a0d54ad2-8ee2-48dc-a0da-328b82e1a30e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .btn",
+      "targets": [
+        ["css=.mb-5:nth-child(2) .col-md-6:nth-child(1) .btn", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Reserve Lunch')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0241187-651d-4e40-826e-52fbb185a6e2",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Reservation successful!\nToken: a83b38f8-9723-4adb-b6e1-7d591be56161\nMeal ID: 1\nNumber of People: 12",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "c55cb072-bd85-4b44-8f6e-ab7596222c3a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["35f11624-462d-408b-92ca-2a11e9b451ab"]
+  }],
+  "urls": ["http://localhost:5173/"],
+  "plugins": []
+}

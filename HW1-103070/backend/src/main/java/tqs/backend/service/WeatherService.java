@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tqs.backend.cache.CacheEntry;
@@ -57,6 +59,47 @@ public class WeatherService {
         }
 
         return null; 
+    }
+
+    public List<CacheEntry> getAllForecasts(int cityId) {
+        log.info("Fetching all cached forecasts");
+        
+        List<CacheEntry> allEntries = cache.getAllEntries();
+
+        if (allEntries.size() == 5) {
+            return allEntries;
+        }
+
+        log.info("Cache is not full, fetching from API");
+        List<LocalDate> allKeys = cache.getAllKeys();
+
+        String response = requestAPIService.getForecastAPICall(cityId);
+
+        if (response != null) {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                JSONArray dataArray = jsonResponse.getJSONArray("data");
+                
+                for (int i = 0; i < dataArray.length(); i++) {
+                    JSONObject dayData = dataArray.getJSONObject(i);
+                    LocalDate forecastDate = LocalDate.parse(dayData.getString("forecastDate"));
+                    
+                    if (!allKeys.contains(forecastDate)) {
+                        double minTemp = dayData.getDouble("tMin");
+                        double maxTemp = dayData.getDouble("tMax");
+                        double precipitation = dayData.getDouble("precipitaProb");
+                        LocalDateTime timestamp = LocalDateTime.now();
+
+                        CacheEntry entry = new CacheEntry(minTemp, maxTemp, precipitation, timestamp, forecastDate);
+                        cache.put(forecastDate, entry);
+                    }
+                }
+            } catch (Exception e) {
+                log.error("Error parsing weather forecast: {}", e.getMessage());
+            }
+        }
+
+        return cache.getAllEntries();
     }
 
     public String cacheStatistics() {

@@ -9,7 +9,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpEntity;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,16 +23,14 @@ class WeatherControllerIT {
     private TestRestTemplate restTemplate;
 
     private final int cityId = 1010500;  
-    private final LocalDate targetDate = LocalDate.of(2025, 4, 8);  // Example date, ensure this is valid for testing
+    private final LocalDate targetDate = LocalDate.now().plusDays(1);
 
     @Test
     void whenValidDateAndCity_thenReturnsForecast() throws Exception {
-        String url = "http://localhost:" + randomServerPort + "/api/v1/weather/" + cityId;
-
-        HttpEntity<LocalDate> requestEntity = new HttpEntity<>(targetDate);
+        String url = "http://localhost:" + randomServerPort + "/api/v1/weather/" + cityId + "?date=" + targetDate;
 
         ResponseEntity<CacheEntry> response = restTemplate.exchange(
-                url, HttpMethod.POST, requestEntity, CacheEntry.class);
+                url, HttpMethod.GET, null, CacheEntry.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
@@ -46,12 +43,10 @@ class WeatherControllerIT {
     void whenInvalidDate_thenReturnsEmpty() throws Exception {
         LocalDate invalidDate = LocalDate.of(2025, 12, 25);  
 
-        String url = "http://localhost:" + randomServerPort + "/api/v1/weather/" + cityId;
-
-        HttpEntity<LocalDate> requestEntity = new HttpEntity<>(invalidDate);
+        String url = "http://localhost:" + randomServerPort + "/api/v1/weather/" + cityId + "?date=" + invalidDate;
 
         ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.POST, requestEntity, String.class);
+                url, HttpMethod.GET, null, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNull();
