@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import tqs.backend.cache.CacheEntry;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -99,5 +100,38 @@ class WeatherService_UnitTest {
         assertEquals(date, entry.getForecastDate());
 
         verify(requestAPIService, times(1)).getForecastAPICall(1010500);
+    }
+
+    @Test
+    void testGetAllForecastsCacheNotFull() {
+        String mockApiResponse = "{ \"data\": [" +
+            "{ \"forecastDate\": \"2025-04-07\", \"tMin\": 10.0, \"tMax\": 20.0, \"precipitaProb\": 40.0 }," +
+            "{ \"forecastDate\": \"2025-04-08\", \"tMin\": 11.0, \"tMax\": 21.0, \"precipitaProb\": 41.0 }," +
+            "{ \"forecastDate\": \"2025-04-09\", \"tMin\": 12.0, \"tMax\": 22.0, \"precipitaProb\": 42.0 }" +
+        "] }";
+
+        when(requestAPIService.getForecastAPICall(1010500)).thenReturn(mockApiResponse);
+
+        // First, get one forecast to simulate an incomplete cache
+        LocalDate date = LocalDate.of(2025, 4, 7);
+        weatherService.getForecast(date, 1010500);
+
+        // Now, get all forecasts - this should trigger API call because cache has less than 5
+        List<CacheEntry> entries = weatherService.getAllForecasts(1010500);
+
+        assertNotNull(entries);
+        assertTrue(entries.size() >= 3);  // We added 3 new from mock + maybe previous cached one
+
+        // Validate one known entry from the mock response
+        boolean found = entries.stream().anyMatch(e ->
+            e.getForecastDate().equals(LocalDate.of(2025, 4, 9)) &&
+            e.getMinTemperature() == 12.0 &&
+            e.getMaxTemperature() == 22.0 &&
+            e.getPrecipitationProbability() == 42.0
+        );
+
+        assertTrue(found, "Expected forecast entry for 2025-04-09 not found in cache.");
+
+        verify(requestAPIService, atLeastOnce()).getForecastAPICall(1010500);
     }
 }

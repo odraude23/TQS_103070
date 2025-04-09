@@ -113,32 +113,4 @@ public class Reservation {
                 ", meal=" + meal +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Reservation)) return false;
-
-        Reservation that = (Reservation) o;
-
-        if (numberOfPeople != that.numberOfPeople) return false;
-        if (isUsed != that.isUsed) return false;
-        if (isCancelled != that.isCancelled) return false;
-        if (!id.equals(that.id)) return false;
-        if (!token.equals(that.token)) return false;
-        if (!reservationDateTime.equals(that.reservationDateTime)) return false;
-        return meal.equals(that.meal);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + token.hashCode();
-        result = 31 * result + reservationDateTime.hashCode();
-        result = 31 * result + numberOfPeople;
-        result = 31 * result + (isUsed ? 1 : 0);
-        result = 31 * result + (isCancelled ? 1 : 0);
-        result = 31 * result + meal.hashCode();
-        return result;
-    }
 }

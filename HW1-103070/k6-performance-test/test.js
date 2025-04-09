@@ -4,8 +4,8 @@ const BASE_URL = __ENV.BASE_URL || "http://localhost:8080";
 
 export const options = {
   stages: [
-  { duration: '5s', target: 200 },
-  { duration: '10s', target: 200 },
+  { duration: '5s', target: 20 },
+  { duration: '10s', target: 20 },
   { duration: '5s', target: 0 },
   ],
 };

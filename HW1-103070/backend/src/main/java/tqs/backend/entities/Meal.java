@@ -134,34 +134,4 @@ public class Meal {
                 ", restaurant=" + restaurant +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Meal meal)) return false;
-
-        if (reservationLimit != meal.reservationLimit) return false;
-        if (!id.equals(meal.id)) return false;
-        if (!name.equals(meal.name)) return false;
-        if (!soup.equals(meal.soup)) return false;
-        if (!dessert.equals(meal.dessert)) return false;
-        if (!mainCourse.equals(meal.mainCourse)) return false;
-        if (!mealType.equals(meal.mealType)) return false;
-        if (!date.equals(meal.date)) return false;
-        return restaurant.equals(meal.restaurant);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + soup.hashCode();
-        result = 31 * result + dessert.hashCode();
-        result = 31 * result + mainCourse.hashCode();
-        result = 31 * result + mealType.hashCode();
-        result = 31 * result + date.hashCode();
-        result = 31 * result + reservationLimit;
-        result = 31 * result + restaurant.hashCode();
-        return result;
-    }
 }
