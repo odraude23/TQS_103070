@@ -36,7 +36,9 @@ public class ReservationSteps {
 
     @When("I click on the reservation button")
     public void iClickOnTheReservationButton() {
-        WebElement reserveButton = driver.findElement(By.cssSelector(".mb-5:nth-child(2) .col-md-6:nth-child(1) .btn"));
+        WebElement reserveButton = driver.findElement(By.cssSelector(
+            ".mb-5:nth-child(2) .col-md-6:nth-child(1) .btn"
+            ));
         reserveButton.click();
     }
 
